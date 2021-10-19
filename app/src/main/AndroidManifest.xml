@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.app">
         <activity
+            android:name=".NaiveBayes"
+            android:exported="true" />
+        <activity
             android:name=".ResultActivity"
             android:exported="true" />
         <activity

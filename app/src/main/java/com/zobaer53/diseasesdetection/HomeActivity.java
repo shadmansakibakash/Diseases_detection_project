@@ -1,11 +1,11 @@
 package com.zobaer53.diseasesdetection;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -16,7 +16,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -70,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         checkButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
 
@@ -87,6 +87,15 @@ public class HomeActivity extends AppCompatActivity {
                     ageEditText.setError("Please enter age");
 
                 }else {
+
+                    NaiveBayes naiveBayesDemo = new NaiveBayes();
+                    try {
+                        naiveBayesDemo.getDataSet("Testing.arff");
+                        naiveBayesDemo.process();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                     Intent intent = new Intent(HomeActivity.this,ResultActivity.class);
                     intent.putExtra("name",nameEditText.getText().toString());
                     intent.putExtra("gender",genderEditText.getText().toString());
